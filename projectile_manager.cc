@@ -7,17 +7,16 @@
 
 constexpr float kCooldown_limit_ = 0.05f;
 
-void ProjectileManager::Spawn(sf::Vector2f spawn_position)
+void ProjectileManager::Spawn(sf::Vector2f spawn_position, sf::Vector2f direction)
 {
 	if (cooldown_dt_ < kCooldown_limit_) {
 		return;
 	}
 
-	projectiles_.emplace_back();
-	projectiles_.back().setPosition(spawn_position);
+	projectiles_.emplace_back(direction);
+	projectiles_.back().SetPosition(spawn_position);
 	cooldown_dt_ = 0;
 }
-
 
 void ProjectileManager::Refresh(float dt, const sf::Vector2u& window_size)
 {
@@ -28,8 +27,9 @@ void ProjectileManager::Refresh(float dt, const sf::Vector2u& window_size)
 		projectiles_.end(),
 		[](const Projectile& p){return p.IsDead(); });
 
-	if (remove_elt != projectiles_.end()) {
-		projectiles_.erase(remove_elt);
+	if (remove_elt != projectiles_.end())
+	{
+		projectiles_.erase(remove_elt, projectiles_.end());
 	};
 
 	for (Projectile& p : projectiles_)
@@ -47,6 +47,21 @@ void ProjectileManager::CheckCollisions(std::vector<Meteorite>& meteorites_) {
 			if (p.IsDead()==false && m.IsDead()==false && p.Intersects(m.HitBox())) {
 				p.SetDeath();
 				m.SetDeath();
+			}
+		}
+	}
+}
+
+void ProjectileManager::CheckCollisions(std::vector<Enemy>& enemy)
+{
+	for (auto& p : projectiles_)
+		{
+		for (auto& e : enemy)
+		{
+			if (p.IsDead() == false && e.IsDead() == false && p.Intersects(e.HitBox()))
+			{
+				p.SetDeath();
+				e.Damage(1);
 			}
 		}
 	}

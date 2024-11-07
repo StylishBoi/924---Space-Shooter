@@ -39,7 +39,13 @@
     <ClCompile Include="entity.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity_manager.cc">
+    <ClCompile Include="mainmenu.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_manager.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +71,13 @@
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="entity_manager.h">
+    <ClInclude Include="mainmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

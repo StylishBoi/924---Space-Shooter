@@ -7,7 +7,7 @@
 sf::Texture Projectile::texture_;
 std::array<sf::Texture, 4> Projectile::animation_;
 
-Projectile::Projectile()
+Projectile::Projectile(sf::Vector2f direction)
 {
 	texture_.loadFromFile("assets\\PNG\\Lasers\\laserGreen12.png");
 
@@ -17,23 +17,28 @@ Projectile::Projectile()
 	animation_[3].loadFromFile("assets\\PNG\\Lasers\\laserGreen05.png");
 
 	sprite_.setTexture(texture_);
-
-	setOrigin(0, texture_.getSize().y / 2);
 	setRotation(90);
 	setScale(0.5f, 0.5f);
 
-	direction_ = { 500 , 0 };
+	//Inversion due to rotation
+	hit_box_.width *= (float)sprite_.getTextureRect().width * getScale().x;
+	hit_box_.height *= (float)sprite_.getTextureRect().width * getScale().y;
+
+	direction_ = direction;
 
 }
 
-void Projectile::UpdateAnimation(float dt) {
+void Projectile::UpdateAnimation(float dt)
+{
 	time_elapsed_ += dt;
 	if (time_elapsed_ > 0.25f) {
 		idx_texture_++;
-		if (idx_texture_ >= animation_.size()) {
+		if (idx_texture_ >= animation_.size())
+		{
 			idx_texture_ = 0;
 		}
+
+		time_elapsed_ = 0;
+		sprite_.setTexture(animation_[idx_texture_]);
 	}
-	time_elapsed_ = 0;
-	sprite_.setTexture(animation_[idx_texture_]);
 }

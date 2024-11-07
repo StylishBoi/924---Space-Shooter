@@ -6,6 +6,7 @@
 
 #include "meteorites.h"
 #include "projectile.h"
+#include "enemy.h"
 
 class ProjectileManager : public sf::Drawable
 {
@@ -15,9 +16,13 @@ private:
 	float cooldown_dt_ = 0;
 
 public:
-	void Spawn(sf::Vector2f spawn_position);
+	std::vector<Projectile>& GetEntities() { return projectiles_; }
+
+	void Spawn(sf::Vector2f spawn_position, sf::Vector2f direction);
 	void Refresh(float dt, const sf::Vector2u& window_size);
+
 	void CheckCollisions(std::vector<Meteorite>& meteorites_);
+	void CheckCollisions(std::vector<Enemy>& enemy);
 
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

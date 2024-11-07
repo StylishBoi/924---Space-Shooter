@@ -128,9 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="924 - Space Shooter.cpp" />
+    <ClCompile Include="enemy.cc" />
+    <ClCompile Include="enemy_manager.cc" />
     <ClCompile Include="entity.cc" />
-    <ClCompile Include="entity_manager.cc" />
     <ClCompile Include="Game.cc" />
+    <ClCompile Include="mainmenu.cc" />
     <ClCompile Include="meteorites.cc" />
     <ClCompile Include="meteorites_manager.cc" />
     <ClCompile Include="starship.cc" />
@@ -138,9 +140,11 @@
     <ClCompile Include="projectile_manager.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemy_manager.h" />
     <ClInclude Include="entity.h" />
-    <ClInclude Include="entity_manager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="mainmenu.h" />
     <ClInclude Include="meteorites.h" />
     <ClInclude Include="meteorites_manager.h" />
     <ClInclude Include="projectile.h" />

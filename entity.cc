@@ -1,36 +1,44 @@
-#include "entity.h"4
+#ifndef ENTITY_CC
+#define ENTITY_CC
+
+#include "entity.h"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
-void Entity::Move(float dt, const sf::Vector2u& window_size) {
+void Entity::Move(float dt, const sf::Vector2u& window_size)
+{
 	setPosition(getPosition() + direction_ * dt);
+
+	hit_box_.left = getPosition().x;
+	hit_box_.top = getPosition().y;
 	
 	sf::Vector2f position = getPosition();
 	sf::Vector2f borders = sf::Vector2f(sprite_.getGlobalBounds().width / 2, sprite_.getGlobalBounds().height / 2);
 
-	if (position.x<(-1 * borders.x) ||
-		position.x>(window_size.x + borders.x) ||
-		position.y<(-1 * borders.y) ||
+	if (position.x<-1 * borders.x ||
+		position.x>window_size.x + borders.x ||
+		position.y<-1 * borders.y ||
 		position.y>window_size.y + borders.y)
 	{
 		is_dead_ = true;
 	}
 }
 
-bool Entity::Intersects(sf::FloatRect hitBox)
+void Entity::SetPosition(float x, float y)
 {
-	return HitBox().intersects(hitBox);
+	setPosition(x, y);
 }
 
-sf::FloatRect Entity::HitBox()
+void Entity::SetPosition(sf::Vector2f position)
 {
-	sf::FloatRect hit_box = sprite_.getGlobalBounds();
+	setPosition(position.x, position.y);
+}
 
-	hit_box.left += getPosition().x;
-	hit_box.top += getPosition().y;
-
-	return hit_box;
+bool Entity::Intersects(sf::FloatRect hitBox) const
+{
+	return hit_box_.intersects(hitBox);
 }
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -38,3 +46,5 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	states.transform *= getTransform();
 	target.draw(sprite_, states);
 }
+
+#endif

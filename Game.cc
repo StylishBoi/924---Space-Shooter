@@ -3,11 +3,13 @@
 
 #include "Game.h"
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
-#include <iostream>
 
-Game::Game() {
+constexpr float kCooldown_limit_ = 0.15f;
+
+Game::Game()
+{
     window_.create(sf::VideoMode(1280, 720), "Space Shooter");
 }
 
@@ -17,9 +19,12 @@ void Game::loop() {
 
     while (window_.isOpen())
     {
+
+        //---------CONTROLS----------
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
-            projectiles_.Spawn(starship_.GetPosition());
+            player_projectiles_.Spawn(starship_.GetPosition(),{1500,0});
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -39,6 +44,8 @@ void Game::loop() {
             starship_.Move(sf::Vector2f(1, 0), dt);
         }
 
+        //---------WINDOW CLOSING----------
+
         sf::Event event;
         while (window_.pollEvent(event))
         {
@@ -46,14 +53,29 @@ void Game::loop() {
                 window_.close();
         }
 
-        projectiles_.Refresh(dt, window_.getSize());
-        meteorites_.Refresh(dt, window_.getSize());
+        //---------REFRESH----------
 
-        projectiles_.CheckCollisions(meteorites_.GetEntities());
+        player_projectiles_.Refresh(dt, window_.getSize());
+        meteorites_.Refresh(dt, window_.getSize());
+        enemy_projectiles_.Refresh(dt, window_.getSize());
+        enemy_manager_.Refresh(dt, window_.getSize(), enemy_projectiles_);
+
+        //---------COLLISIONS----------
+
+        starship_.CheckMeteoritesCollisions(meteorites_.GetEntities());
+        starship_.CheckEnemiesCollisions(enemy_manager_.GetEntities());
+        starship_.CheckProjectilesCollisions(enemy_projectiles_.GetEntities());
+
+        player_projectiles_.CheckCollisions(meteorites_.GetEntities());
+        player_projectiles_.CheckCollisions(enemy_manager_.GetEntities());
+
+        //---------SCREEN DRAWINGS----------
 
         window_.clear();
-        window_.draw(projectiles_);
+        window_.draw(player_projectiles_);
+        window_.draw(enemy_projectiles_);
         window_.draw(meteorites_);
+        window_.draw(enemy_manager_);
         window_.draw(starship_);
         window_.display();
 
@@ -62,3 +84,14 @@ void Game::loop() {
 }
 
 #endif
+
+
+/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    menu_.MoveUp();
+    break;
+}
+
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    menu_.MoveDown();
+    break;
+}*/
