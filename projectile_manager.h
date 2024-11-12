@@ -19,7 +19,7 @@ public:
 	std::vector<Projectile>& GetEntities() { return projectiles_; }
 
 	void Spawn(sf::Vector2f spawn_position, sf::Vector2f direction);
-	void Refresh(float dt, const sf::Vector2u& window_size);
+	void Refresh(const float dt, const sf::Vector2u& window_size);
 
 	void CheckCollisions(std::vector<Meteorite>& meteorites_);
 	void CheckCollisions(std::vector<Enemy>& enemy);

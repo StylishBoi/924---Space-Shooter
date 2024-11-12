@@ -20,9 +20,9 @@ private:
 public:
 	Enemy();
 
-	sf::Vector2f GetPosition();
+	sf::Vector2f GetPosition() const {return getPosition();}
 
-	void Refresh(float dt);
+	void Refresh(const float dt);
 	void Damage(int damage);
 	bool ShootReady();
 };

@@ -13,7 +13,6 @@ protected:
 	bool is_dead_ = false;
 
 public:
-	//Entity()
 	bool IsDead() const { return is_dead_; }
 	void SetDeath() { is_dead_ = true; }
 
@@ -21,8 +20,8 @@ public:
 	void SetPosition(float x, float y);
 	void SetPosition(sf::Vector2f position);
 
-	bool Intersects(sf::FloatRect hitBox) const;
-	sf::FloatRect HitBox() { return hit_box_; };
+	bool Intersects(sf::FloatRect hitbox) const;
+	sf::FloatRect HitBox() { return hit_box_; }
 
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

@@ -20,12 +20,7 @@ Enemy::Enemy()
 
 }
 
-sf::Vector2f Enemy::GetPosition()
-{
-	return getPosition();
-}
-
-void Enemy::Refresh(float dt)
+void Enemy::Refresh(const float dt)
 {
 	shoot_dt_ += dt;
 

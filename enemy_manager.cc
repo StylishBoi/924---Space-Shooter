@@ -4,13 +4,12 @@
 #include <random>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-constexpr float kSpawnPeriod = 0.75;
-
 void EnemyManager::Refresh(float dt, const sf::Vector2u& window_size, ProjectileManager& enemy_projectiles_)
 {
 	spawn_timer_ += dt;
-	if (spawn_timer_ > kSpawnPeriod) {
+	if (spawn_timer_ > 5.f) {
 		enemies_.emplace_back();
+
 		std::random_device rn_device;
 		std::default_random_engine engine(rn_device());
 		std::uniform_real_distribution<float> uniform_dist(0, window_size.y);

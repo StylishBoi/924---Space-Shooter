@@ -17,12 +17,13 @@ Projectile::Projectile(sf::Vector2f direction)
 	animation_[3].loadFromFile("assets\\PNG\\Lasers\\laserGreen05.png");
 
 	sprite_.setTexture(texture_);
-	setRotation(90);
-	setScale(0.5f, 0.5f);
+	sprite_.setOrigin(0, texture_.getSize().y / 2);
+	sprite_.setRotation(90);
+	sprite_.setScale(0.5f, 0.5f);
 
 	//Inversion due to rotation
 	hit_box_.width *= (float)sprite_.getTextureRect().width * getScale().x;
-	hit_box_.height *= (float)sprite_.getTextureRect().width * getScale().y;
+	hit_box_.height *= (float)sprite_.getTextureRect().height * getScale().y;
 
 	direction_ = direction;
 

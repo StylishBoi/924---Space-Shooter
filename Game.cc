@@ -8,9 +8,15 @@
 
 constexpr float kCooldown_limit_ = 0.15f;
 
+sf::Sprite S_background_;
+sf::Texture T_background_;
+
 Game::Game()
 {
     window_.create(sf::VideoMode(1280, 720), "Space Shooter");
+    T_background_.loadFromFile("assets\\PNG\\background.jpg");
+    S_background_.setTexture(T_background_);
+    S_background_.scale(0.8f, 0.6f);
 }
 
 void Game::loop() {
@@ -72,6 +78,7 @@ void Game::loop() {
         //---------SCREEN DRAWINGS----------
 
         window_.clear();
+        window_.draw(S_background_);
         window_.draw(player_projectiles_);
         window_.draw(enemy_projectiles_);
         window_.draw(meteorites_);

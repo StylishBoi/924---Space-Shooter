@@ -7,7 +7,7 @@
 void MeteoritesManager::Refresh(float dt, const sf::Vector2u& window_size)
 {
 	time_elapsed_ += dt;
-	if (time_elapsed_ > 1.f) {
+	if (time_elapsed_ > 1.5f) {
 		meteorites_.emplace_back();
 		std::random_device rn_device;
 		std::default_random_engine engine(rn_device());

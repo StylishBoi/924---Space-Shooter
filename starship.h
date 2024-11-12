@@ -23,12 +23,12 @@ public:
 	void Move(sf::Vector2f direction, float dt);
 
 	void SetPosition(sf::Vector2u direction);
-	sf::Vector2f GetPosition() { return getPosition(); };
+	sf::Vector2f GetPosition() const { return getPosition(); }
 
-	sf::FloatRect Hitbox() { return hit_box_; }
-	void CheckMeteoritesCollisions(std::vector<Meteorite>& vector);
-	void CheckProjectilesCollisions(std::vector<Projectile>& vector);
-	void CheckEnemiesCollisions(std::vector<Enemy>& vector);
+	sf::FloatRect Hitbox() const{ return hit_box_; }
+	void CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_);
+	void CheckProjectilesCollisions(std::vector<Projectile>& projectiles_);
+	void CheckEnemiesCollisions(std::vector<Enemy>& enemies_);
 	
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
