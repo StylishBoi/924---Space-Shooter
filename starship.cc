@@ -7,6 +7,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+constexpr double kShootPeriod = 0.15f;
+
 Starship::Starship()
 {
 	texture_.loadFromFile("assets\\PNG\\playerShip1_blue.png");
@@ -45,6 +47,16 @@ void Starship::ShipDamage()
 	{
 		SetDeath();
 		std::cout << "Game over";
+	}
+}
+
+void Starship::Refresh(float dt)
+{
+	shoot_dt_ += dt;
+	if (shoot_dt_ > kShootPeriod)
+	{
+		is_shoot_ready_ = true;
+		shoot_dt_ = 0;
 	}
 }
 

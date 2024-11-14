@@ -10,12 +10,18 @@ constexpr float kCooldown_limit_ = 0.15f;
 sf::Sprite S_background_;
 sf::Texture T_background_;
 
+sf::SoundBuffer m_soundbuffer;
+sf::Sound m_sound;
+
 Game::Game()
 {
     window_.create(sf::VideoMode(1280, 720), "Space Shooter");
     T_background_.loadFromFile("assets\\PNG\\background.jpg");
     S_background_.setTexture(T_background_);
     S_background_.scale(0.8f, 0.6f);
+
+    m_soundbuffer.loadFromFile("assets\\Audio\\laserSmall_004.OGG");
+    m_sound.setBuffer(m_soundbuffer);
 }
 
 void Game::loop() {
@@ -32,7 +38,13 @@ void Game::loop() {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
-            player_projectiles_.Spawn(starship_.GetPosition(),{1500,0});
+            if (starship_.IsShootReady())
+            {
+                player_projectiles_.Spawn(starship_.GetPosition(), { 1500,0 });
+                m_sound.play();
+                starship_.ShootConfirm();
+            }
+            
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -67,6 +79,7 @@ void Game::loop() {
         meteorites_.Refresh(dt, window_.getSize());
         enemy_projectiles_.Refresh(dt, window_.getSize());
         enemy_manager_.Refresh(dt, window_.getSize(), enemy_projectiles_);
+        starship_.Refresh(dt);
 
         //---------COLLISIONS----------
 

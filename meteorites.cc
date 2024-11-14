@@ -25,6 +25,8 @@ Meteorite::Meteorite()
 
 	direction_ = { rnd_x(engine), rnd_y(engine) };
 
+	m_soundbuffer.loadFromFile("assets\\Audio\\explosionCrunch_000.OGG");
+	m_sound.setBuffer(m_soundbuffer);
 }
 
 #endif

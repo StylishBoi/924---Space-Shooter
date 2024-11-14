@@ -21,6 +21,8 @@ private:
 	int health=5;
 
 	bool is_dead_ = false;
+	float shoot_dt_ = 0.f;
+	bool is_shoot_ready_ = false;
 
 public:
 	Starship();
@@ -32,6 +34,10 @@ public:
 
 	sf::FloatRect Hitbox() const{ return hit_box_; }
 	void ShipDamage();
+
+	void Refresh(float dt);
+	bool IsShootReady() const { return is_shoot_ready_; }
+	void ShootConfirm() { is_shoot_ready_ = false; }
 
 	void CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_);
 	void CheckProjectilesCollisions(std::vector<Projectile>& projectiles_);
