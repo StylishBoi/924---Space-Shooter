@@ -8,15 +8,19 @@
 #include "meteorites.h"
 #include "projectile.h"
 #include "enemy.h"
+#include "entity.h"
 
 const float kSpeed = 300.0f;
 
-class Starship : public sf::Drawable, private sf::Transformable
+class Starship : public Entity
 {
 private:
 	sf::Sprite sprite_;
 	sf::Texture texture_;
 	sf::FloatRect hit_box_;
+	int health=5;
+
+	bool is_dead_ = false;
 
 public:
 	Starship();
@@ -24,8 +28,11 @@ public:
 
 	void SetPosition(sf::Vector2u direction);
 	sf::Vector2f GetPosition() const { return getPosition(); }
+	int GetHealth() const { return health; }
 
 	sf::FloatRect Hitbox() const{ return hit_box_; }
+	void ShipDamage();
+
 	void CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_);
 	void CheckProjectilesCollisions(std::vector<Projectile>& projectiles_);
 	void CheckEnemiesCollisions(std::vector<Enemy>& enemies_);

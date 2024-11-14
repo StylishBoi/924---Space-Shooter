@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="924 - Space Shooter.cpp" />
+    <ClCompile Include="display.cc" />
     <ClCompile Include="enemy.cc" />
     <ClCompile Include="enemy_manager.cc" />
     <ClCompile Include="entity.cc" />
@@ -140,6 +141,7 @@
     <ClCompile Include="projectile_manager.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="display.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemy_manager.h" />
     <ClInclude Include="entity.h" />

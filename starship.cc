@@ -14,12 +14,17 @@ Starship::Starship()
 	sprite_.setOrigin(texture_.getSize().x / 2, texture_.getSize().y / 2);
 	sprite_.setRotation(90.f);
 	sprite_.scale(0.5f, 1.0f);
+	setPosition({150,350});
+	hit_box_.width += (float)sprite_.getTextureRect().width * getScale().x;
+	hit_box_.height += (float)sprite_.getTextureRect().height * getScale().y;
+
 
 }
 
 void Starship::Move(sf::Vector2f direction, float dt)
 {
-	move(direction * kSpeed * dt);
+	move(direction.x * kSpeed * dt, direction.y * kSpeed * dt);
+	hit_box_ = sprite_.getGlobalBounds();
 	hit_box_.left += getPosition().x;
 	hit_box_.top += getPosition().y;
 }
@@ -27,8 +32,20 @@ void Starship::Move(sf::Vector2f direction, float dt)
 void Starship::SetPosition(sf::Vector2u position)
 {
 	setPosition(sf::Vector2f(position));
+	hit_box_ = sprite_.getGlobalBounds();
 	hit_box_.left += getPosition().x;
 	hit_box_.top += getPosition().y;
+}
+
+void Starship::ShipDamage()
+{
+	health -= 1;
+
+	if (health <= 0)
+	{
+		SetDeath();
+		std::cout << "Game over";
+	}
 }
 
 void Starship::CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_)
@@ -36,8 +53,9 @@ void Starship::CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_)
 	for (auto& m : meteorites_)
 	{
 		if (m.IsDead() == false && hit_box_.intersects(m.HitBox())) {
-			std::cout << "It hit the meteorites.";
 			m.SetDeath();
+			std::cout << "The player is hit.";
+			ShipDamage();
 		}
 	}
 }
@@ -49,6 +67,8 @@ void Starship::CheckProjectilesCollisions(std::vector<Projectile>& projectiles_)
 	{
 		if (p.IsDead() == false && hit_box_.intersects(p.HitBox())) {
 			p.SetDeath();
+			std::cout << "The player is hit.";
+			ShipDamage();
 		}
 	}
 }
@@ -61,6 +81,8 @@ void Starship::CheckEnemiesCollisions(std::vector<Enemy>& enemies_)
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
 			e.Damage(5);
+			std::cout << "The player is hit.";
+			ShipDamage();
 		}
 	}
 }

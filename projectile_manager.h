@@ -11,6 +11,7 @@
 class ProjectileManager : public sf::Drawable
 {
 private:
+	int score=0;
 	std::vector<Projectile> projectiles_;
 	sf::Clock cooldown_timer_;
 	float cooldown_dt_ = 0;
@@ -20,6 +21,7 @@ public:
 
 	void Spawn(sf::Vector2f spawn_position, sf::Vector2f direction);
 	void Refresh(const float dt, const sf::Vector2u& window_size);
+	int GetScore() const { return score; }
 
 	void CheckCollisions(std::vector<Meteorite>& meteorites_);
 	void CheckCollisions(std::vector<Enemy>& enemy);

@@ -47,6 +47,7 @@ void ProjectileManager::CheckCollisions(std::vector<Meteorite>& meteorites_) {
 			if (p.IsDead()==false && m.IsDead()==false && p.Intersects(m.HitBox())) {
 				p.SetDeath();
 				m.SetDeath();
+				score++;
 			}
 		}
 	}
@@ -62,6 +63,8 @@ void ProjectileManager::CheckCollisions(std::vector<Enemy>& enemy)
 			{
 				p.SetDeath();
 				e.Damage(1);
+				score++;
+				std::cout << "The score has increased " << score << "\n";
 			}
 		}
 	}

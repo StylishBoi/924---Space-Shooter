@@ -8,6 +8,7 @@
 #include "starship.h"
 #include "enemy.h"
 #include "enemy_manager.h"
+#include "display.h"
 //#include "mainmenu.h"
 
 class Game
@@ -19,6 +20,7 @@ private:
 	ProjectileManager enemy_projectiles_;
 	MeteoritesManager meteorites_;
 	EnemyManager enemy_manager_;
+	Display display_;
 
 	Starship starship_;
 	//MainMenu menu_;

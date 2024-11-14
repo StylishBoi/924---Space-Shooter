@@ -2,7 +2,6 @@
 #define GAME_CC
 
 #include "Game.h"
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -25,6 +24,9 @@ void Game::loop() {
 
     while (window_.isOpen())
     {
+
+        display_.UpdateHealth(starship_.GetHealth());
+        display_.UpdateScore(player_projectiles_.GetScore());
 
         //---------CONTROLS----------
 
@@ -84,6 +86,10 @@ void Game::loop() {
         window_.draw(meteorites_);
         window_.draw(enemy_manager_);
         window_.draw(starship_);
+
+        window_.draw(display_.GetHealth());
+        window_.draw(display_.GetScore());
+
         window_.display();
 
         dt = clock_.restart().asSeconds();

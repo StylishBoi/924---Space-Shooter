@@ -29,17 +29,23 @@ void Entity::Move(float dt, const sf::Vector2u& window_size)
 void Entity::SetPosition(float x, float y)
 {
 	setPosition(x, y);
+	hit_box_.width = (float)sprite_.getTextureRect().width * getScale().x;
+	hit_box_.height = (float)sprite_.getTextureRect().height * getScale().y;
 }
 
 void Entity::SetPosition(sf::Vector2f position)
 {
 	setPosition(position.x, position.y);
+	hit_box_.width = (float)sprite_.getTextureRect().width * getScale().x;
+	hit_box_.height = (float)sprite_.getTextureRect().height * getScale().y;
 }
 
 bool Entity::Intersects(sf::FloatRect hitbox) const
 {
 	return hit_box_.intersects(hitbox);
 }
+
+
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
