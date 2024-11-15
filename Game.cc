@@ -13,10 +13,30 @@ sf::Sound S_Enemy;
 sf::Sound S_Enemy_Hit;
 sf::Sound S_Background;
 sf::Sound S_Starship;
+sf::Sound S_Instructions;
+sf::Sound S_Gameover;
 
 Game::Game()
 {
     window_.create(sf::VideoMode(1280, 720), "Space Shooter");
+}
+
+void Game::instructions() {
+
+    S_Instructions = sound_.GetInstructions();
+    S_Instructions.play();
+
+    while (window_.isOpen()) {
+        window_.draw(display_.GetInstructions());
+        window_.display();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            S_Instructions.stop();
+            window_.close();
+            Game game;
+            game.loop();
+        }
+    }
+        
 }
 
 void Game::loop() {
@@ -29,13 +49,13 @@ void Game::loop() {
     S_Enemy_Hit = sound_.GetSEnemyHit();
     S_Background = sound_.GetBackground();
     S_Starship = sound_.GetStarship();
+    S_Gameover = sound_.GetGameover();
 
     //Play background music
     S_Background.play();
 
     while (window_.isOpen())
     {
-
 
         if (starship_.GetHealth() > 0) {
 
@@ -137,7 +157,11 @@ void Game::loop() {
         window_.draw(display_.GetScore());
 
         if (starship_.GetHealth() <= 0) {
+            S_Background.stop();
+            S_Gameover.play();
+            display_.GameOverScore();
             window_.draw(display_.GetGameover());
+            window_.draw(display_.GetScore());
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && starship_.GetHealth() <= 0) {
@@ -154,13 +178,4 @@ void Game::loop() {
         dt = clock_.restart().asSeconds();
     }
 }
-
-/*while (instructions==true)
-        {
-            window_.display();
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-                instructions = false;
-                break;
-            }
-        }*/
 #endif

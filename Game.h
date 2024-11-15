@@ -30,6 +30,7 @@ private:
 
 public:
 	Game();
+	void instructions();
 	void loop();
 };
 

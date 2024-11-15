@@ -42,6 +42,13 @@ public:
 	void UpdateHealth(int health) {
 		health_.setString(std::to_string(health));
 	}
+	void GameOverScore() {
+		score_.setPosition(645, 442);
+		score_.setOutlineThickness(4);
+		score_.setOutlineColor(sf::Color::White);
+		score_.setFillColor(sf::Color::Black);
+		score_.Bold;
+	}
 };
 
 #endif
