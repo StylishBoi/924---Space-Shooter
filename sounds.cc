@@ -22,7 +22,4 @@ Sound::Sound()
 
     b_instructions.loadFromFile("assets\\Audio\\instructions_song.OGG");
     s_instructions.setBuffer(b_instructions);
-
-    b_gameover.loadFromFile("assets\\Audio\\gameover.OGG");
-    s_gameover.setBuffer(b_gameover);
 }

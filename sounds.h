@@ -29,9 +29,6 @@ private:
 	sf::SoundBuffer b_instructions;
 	sf::Sound s_instructions;
 
-	sf::SoundBuffer b_gameover;
-	sf::Sound s_gameover;
-
 public:
 	Sound();
 
@@ -43,7 +40,6 @@ public:
 	sf::Sound GetBackground() { return s_background; }
 	sf::Sound GetStarship() { return s_starship; }
 	sf::Sound GetInstructions() { return s_instructions; }
-	sf::Sound GetGameover() { return s_gameover; }
 };
 
 #endif

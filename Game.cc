@@ -14,7 +14,6 @@ sf::Sound S_Enemy_Hit;
 sf::Sound S_Background;
 sf::Sound S_Starship;
 sf::Sound S_Instructions;
-sf::Sound S_Gameover;
 
 Game::Game()
 {
@@ -49,7 +48,6 @@ void Game::loop() {
     S_Enemy_Hit = sound_.GetSEnemyHit();
     S_Background = sound_.GetBackground();
     S_Starship = sound_.GetStarship();
-    S_Gameover = sound_.GetGameover();
 
     //Play background music
     S_Background.play();
@@ -158,7 +156,6 @@ void Game::loop() {
 
         if (starship_.GetHealth() <= 0) {
             S_Background.stop();
-            S_Gameover.play();
             display_.GameOverScore();
             window_.draw(display_.GetGameover());
             window_.draw(display_.GetScore());
