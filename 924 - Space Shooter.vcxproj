@@ -133,9 +133,9 @@
     <ClCompile Include="enemy_manager.cc" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="Game.cc" />
-    <ClCompile Include="mainmenu.cc" />
     <ClCompile Include="meteorites.cc" />
     <ClCompile Include="meteorites_manager.cc" />
+    <ClCompile Include="sounds.cc" />
     <ClCompile Include="starship.cc" />
     <ClCompile Include="Projectile.cc" />
     <ClCompile Include="projectile_manager.cc" />
@@ -146,11 +146,11 @@
     <ClInclude Include="enemy_manager.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="mainmenu.h" />
     <ClInclude Include="meteorites.h" />
     <ClInclude Include="meteorites_manager.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="projectile_manager.h" />
+    <ClInclude Include="sounds.h" />
     <ClInclude Include="starship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

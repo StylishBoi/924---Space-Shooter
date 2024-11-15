@@ -9,7 +9,7 @@
 #include "enemy.h"
 #include "enemy_manager.h"
 #include "display.h"
-//#include "mainmenu.h"
+#include "sounds.h"
 
 class Game
 {
@@ -20,10 +20,12 @@ private:
 	ProjectileManager enemy_projectiles_;
 	MeteoritesManager meteorites_;
 	EnemyManager enemy_manager_;
-	Display display_;
+	Enemy enemy;
 
 	Starship starship_;
-	//MainMenu menu_;
+
+	Sound sound_;
+	Display display_;
 
 	sf::Clock clock_;
 

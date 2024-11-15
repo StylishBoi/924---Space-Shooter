@@ -7,30 +7,33 @@
 
 constexpr float kCooldown_limit_ = 0.15f;
 
-sf::Sprite S_background_;
-sf::Texture T_background_;
-
-sf::SoundBuffer m_soundbuffer;
-sf::Sound m_sound;
+sf::Sound S_Projectile;
+sf::Sound S_Meteorite;
+sf::Sound S_Enemy;
+sf::Sound S_Enemy_Hit;
+sf::Sound S_Background;
 
 Game::Game()
 {
     window_.create(sf::VideoMode(1280, 720), "Space Shooter");
-    T_background_.loadFromFile("assets\\PNG\\background.jpg");
-    S_background_.setTexture(T_background_);
-    S_background_.scale(0.8f, 0.6f);
-
-    m_soundbuffer.loadFromFile("assets\\Audio\\laserSmall_004.OGG");
-    m_sound.setBuffer(m_soundbuffer);
 }
 
 void Game::loop() {
 
     float dt = 0.016f;
 
+    S_Projectile= sound_.GetSProjectile();
+    S_Meteorite=sound_.GetSMeteorite();
+    S_Enemy = sound_.GetSEnemy();
+    S_Enemy_Hit = sound_.GetSEnemyHit();
+    S_Background = sound_.GetBackground();
+
+    //Play background music
+    S_Background.play();
+
     while (window_.isOpen())
     {
-
+        //Display the constant UI
         display_.UpdateHealth(starship_.GetHealth());
         display_.UpdateScore(player_projectiles_.GetScore());
 
@@ -41,7 +44,7 @@ void Game::loop() {
             if (starship_.IsShootReady())
             {
                 player_projectiles_.Spawn(starship_.GetPosition(), { 1500,0 });
-                m_sound.play();
+                S_Projectile.play();
                 starship_.ShootConfirm();
             }
             
@@ -90,18 +93,42 @@ void Game::loop() {
         player_projectiles_.CheckCollisions(meteorites_.GetEntities());
         player_projectiles_.CheckCollisions(enemy_manager_.GetEntities());
 
+        //------------SOUND EFFECTS-------
+
+        if (player_projectiles_.GetCollision() == true) {
+            S_Meteorite.play();
+        }
+        if (player_projectiles_.GetECollision() == true) {
+            S_Enemy_Hit.play();
+        }
+
+        if (enemy.GetDeath() == true) {
+            std::cout << "Hello";
+            S_Enemy.play();
+        }
+
         //---------SCREEN DRAWINGS----------
 
+        //Game
         window_.clear();
-        window_.draw(S_background_);
+        window_.draw(display_.GetBackground());
         window_.draw(player_projectiles_);
         window_.draw(enemy_projectiles_);
         window_.draw(meteorites_);
         window_.draw(enemy_manager_);
         window_.draw(starship_);
 
+        //UI
+        window_.draw(display_.GetScoreText());
+        window_.draw(display_.GetHealthText());
         window_.draw(display_.GetHealth());
         window_.draw(display_.GetScore());
+
+        //---------GAME OVER-------------
+
+        if (starship_.GetHealth() <= 0) {
+            starship_.SetDeath();
+        }
 
         window_.display();
 
@@ -110,14 +137,3 @@ void Game::loop() {
 }
 
 #endif
-
-
-/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    menu_.MoveUp();
-    break;
-}
-
-if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    menu_.MoveDown();
-    break;
-}*/

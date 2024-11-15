@@ -37,6 +37,9 @@ void ProjectileManager::Refresh(const float dt, const sf::Vector2u& window_size)
 		p.Move(dt, window_size);
 		p.UpdateAnimation(dt);
 	}
+
+	collision = false;
+	enemy_collision = false;
 }
 
 void ProjectileManager::CheckCollisions(std::vector<Meteorite>& meteorites_) {
@@ -48,6 +51,7 @@ void ProjectileManager::CheckCollisions(std::vector<Meteorite>& meteorites_) {
 				p.SetDeath();
 				m.SetDeath();
 				score++;
+				collision = true;
 			}
 		}
 	}
@@ -64,7 +68,7 @@ void ProjectileManager::CheckCollisions(std::vector<Enemy>& enemy)
 				p.SetDeath();
 				e.Damage(1);
 				score++;
-				std::cout << "The score has increased " << score << "\n";
+				enemy_collision = true;
 			}
 		}
 	}
