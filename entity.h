@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include <SFML/Graphics/Sprite.hpp>
+#include "SFML/Graphics/Texture.hpp"
 
 class Entity : public sf::Drawable, protected sf::Transformable
 {

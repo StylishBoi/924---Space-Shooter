@@ -30,7 +30,6 @@ void Enemy::Refresh(const float dt)
 		wait_shoot_ = !wait_shoot_;
 		burst_dt_ = 0;
 	}
-	enemy_is_dead = false;
 }
 
 void Enemy::Damage(int damage)
@@ -39,7 +38,6 @@ void Enemy::Damage(int damage)
 
 	if (hp_ <= 0)
 	{
-		enemy_is_dead = true;
 		SetDeath();
 	}
 }

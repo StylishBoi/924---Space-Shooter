@@ -28,8 +28,13 @@ Display::Display()
     health_text_.setFillColor(sf::Color::White);
     health_text_.setPosition(0, 665);
 
-
     T_background_.loadFromFile("assets\\PNG\\background.jpg");
     S_background_.setTexture(T_background_);
     S_background_.scale(0.8f, 0.6f);
+
+    T_instructions.loadFromFile("assets\\PNG\\instructions_manual.png");
+    S_instructions.setTexture(T_instructions);
+
+    T_gameover.loadFromFile("assets\\PNG\\gameover.png");
+    S_gameover.setTexture(T_gameover);
 }

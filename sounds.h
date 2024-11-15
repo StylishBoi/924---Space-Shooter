@@ -23,6 +23,9 @@ private:
 	sf::SoundBuffer b_background;
 	sf::Sound s_background;
 
+	sf::SoundBuffer b_starship;
+	sf::Sound s_starship;
+
 public:
 	Sound();
 
@@ -32,6 +35,7 @@ public:
 	sf::Sound GetSEnemy() { return s_enemy; }
 	sf::Sound GetSEnemyHit() { return s_enemy_hit; }
 	sf::Sound GetBackground() { return s_background; }
+	sf::Sound GetStarship() { return s_starship; }
 };
 
 #endif

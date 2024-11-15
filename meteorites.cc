@@ -24,9 +24,6 @@ Meteorite::Meteorite()
 	std::uniform_real_distribution<float> rnd_y(-50.0, 50.0);
 
 	direction_ = { rnd_x(engine), rnd_y(engine) };
-
-	m_soundbuffer.loadFromFile("assets\\Audio\\explosionCrunch_000.OGG");
-	m_sound.setBuffer(m_soundbuffer);
 }
 
 #endif

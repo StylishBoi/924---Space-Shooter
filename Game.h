@@ -20,7 +20,6 @@ private:
 	ProjectileManager enemy_projectiles_;
 	MeteoritesManager meteorites_;
 	EnemyManager enemy_manager_;
-	Enemy enemy;
 
 	Starship starship_;
 

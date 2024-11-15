@@ -17,6 +17,12 @@ private:
 	sf::Sprite S_background_;
 	sf::Texture T_background_;
 
+	sf::Sprite S_instructions;
+	sf::Texture T_instructions;
+
+	sf::Sprite S_gameover;
+	sf::Texture T_gameover;
+
 public:
 	Display();
 
@@ -26,6 +32,8 @@ public:
 	sf::Text GetScoreText() { return score_text_; }
 	sf::Text GetHealthText() { return health_text_; }
 	sf::Sprite GetBackground() { return S_background_; }
+	sf::Sprite GetInstructions() { return S_instructions; }
+	sf::Sprite GetGameover() { return S_gameover; }
 
 	//Update the text
 	void UpdateScore(int score) {

@@ -9,9 +9,11 @@ class EnemyManager : public sf::Drawable
 private:
 	std::vector<Enemy> enemies_;
 	float spawn_timer_ = 0;
+	bool enemy_dead = false;
 
 public:
 	std::vector<Enemy>& GetEntities() { return enemies_; }
+	bool GetEnemyDeath();
 	void Refresh(float dt, const sf::Vector2u& window_size, ProjectileManager& enemy_projectiles_);
 
 protected:

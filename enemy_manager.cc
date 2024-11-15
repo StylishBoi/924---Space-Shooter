@@ -26,6 +26,7 @@ void EnemyManager::Refresh(float dt, const sf::Vector2u& window_size, Projectile
 
 	if (remove_elt != enemies_.end()) {
 		enemies_.erase(remove_elt);
+		enemy_dead = true;
 	};
 
 	for (auto& e : enemies_)
@@ -38,6 +39,16 @@ void EnemyManager::Refresh(float dt, const sf::Vector2u& window_size, Projectile
 		}
 	}
 
+}
+
+bool EnemyManager::GetEnemyDeath() {
+	if (enemy_dead == true) {
+		enemy_dead = false;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void EnemyManager::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -24,6 +24,8 @@ private:
 	float shoot_dt_ = 0.f;
 	bool is_shoot_ready_ = false;
 
+	bool collision = false;
+
 public:
 	Starship();
 	void Move(sf::Vector2f direction, float dt);
@@ -38,6 +40,8 @@ public:
 	void Refresh(float dt);
 	bool IsShootReady() const { return is_shoot_ready_; }
 	void ShootConfirm() { is_shoot_ready_ = false; }
+
+	bool StarshipCollision() { return collision; }
 
 	void CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_);
 	void CheckProjectilesCollisions(std::vector<Projectile>& projectiles_);

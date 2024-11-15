@@ -46,7 +46,6 @@ void Starship::ShipDamage()
 	if (health <= 0)
 	{
 		SetDeath();
-		std::cout << "Game over";
 	}
 }
 
@@ -58,6 +57,7 @@ void Starship::Refresh(float dt)
 		is_shoot_ready_ = true;
 		shoot_dt_ = 0;
 	}
+	collision = false;
 }
 
 void Starship::CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_)
@@ -66,7 +66,7 @@ void Starship::CheckMeteoritesCollisions(std::vector<Meteorite>& meteorites_)
 	{
 		if (m.IsDead() == false && hit_box_.intersects(m.HitBox())) {
 			m.SetDeath();
-			std::cout << "The player is hit.";
+			collision = true;
 			ShipDamage();
 		}
 	}
@@ -79,7 +79,7 @@ void Starship::CheckProjectilesCollisions(std::vector<Projectile>& projectiles_)
 	{
 		if (p.IsDead() == false && hit_box_.intersects(p.HitBox())) {
 			p.SetDeath();
-			std::cout << "The player is hit.";
+			collision = true;
 			ShipDamage();
 		}
 	}
@@ -93,7 +93,7 @@ void Starship::CheckEnemiesCollisions(std::vector<Enemy>& enemies_)
 		if (e.IsDead() == false && hit_box_.intersects(e.HitBox()))
 		{
 			e.Damage(5);
-			std::cout << "The player is hit.";
+			collision = true;
 			ShipDamage();
 		}
 	}

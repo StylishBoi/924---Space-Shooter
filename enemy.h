@@ -15,14 +15,13 @@ private:
 	float burst_dt_=0.f;
 	bool wait_shoot_ = false;
 
-	bool enemy_is_dead = false;
 	void SetDeath();
 
 public:
 	Enemy();
 
 	sf::Vector2f GetPosition() const {return getPosition();}
-	bool GetDeath() { return enemy_is_dead; }
+	int GetEHealth() { return hp_; }
 
 	void Refresh(const float dt);
 	void Damage(int damage);

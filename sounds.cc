@@ -11,9 +11,12 @@ Sound::Sound()
     b_enemy.loadFromFile("assets\\Audio\\explosionCrunch_002.OGG");
     s_enemy.setBuffer(b_enemy);
 
-    b_enemy_hit.loadFromFile("assets\\Audio\\impactMetal_004.OGG");
-    s_enemy_hit.setBuffer(b_enemy_hit)
-        ;
+    b_enemy_hit.loadFromFile("assets\\Audio\\enemyhit.OGG");
+    s_enemy_hit.setBuffer(b_enemy_hit);
+
     b_background.loadFromFile("assets\\Audio\\background_music.OGG");
     s_background.setBuffer(b_background);
+
+    b_starship.loadFromFile("assets\\Audio\\zapthreetonedown.OGG");
+    s_starship.setBuffer(b_starship);
 }
